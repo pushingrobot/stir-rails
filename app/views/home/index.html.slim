@@ -1,0 +1,7 @@
+h2.instructions
+    span Click a device to wake it up. 
+    span
+        | Running devices are 
+        span.green green
+        | .
+= render partial: 'admin/users/device_button', collection: @devices, as: :device

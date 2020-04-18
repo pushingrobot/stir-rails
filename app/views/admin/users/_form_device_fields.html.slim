@@ -1,0 +1,35 @@
+- id = 0
+- fname = ->(field) { "user[devices_attributes][#{id}][#{field}]" }
+- fid = ->(field) { "user_devices_attributes_#{id}_#{field}]" }
+
+section.device.separated
+  input[name=fname('id') id=fid('fid') value=object.id]
+  aside
+    .field
+        .radio.drop.right
+          - device_icons.each do |sym, str|
+            = input.hidden[type='radio' name=fname('icon') id=fid('icon')+'_'+str value=str
+            = devices_form.label :icon, device_icon(sym), {value: sym.to_s}
+        label Icon
+    .field
+      = devices_form.check_box :active
+      = devices_form.label :active
+    .field._destroy
+      = devices_form.check_box :_destroy, class: 'hidden'
+      = devices_form.label :_destroy, 'Remove'
+  main
+    .field
+      = devices_form.label :name, 'Device Name'
+      = devices_form.text_field :name
+
+    .device-lookup-fields
+      .field.lookup
+        select.select2-device-lookup name="lookup" data-id=devices_form.object&.id
+      hr
+      .row
+        .field
+          = devices_form.label :host, 'Hostname or IP address'
+          = devices_form.text_field :host
+        .field
+          = devices_form.label :mac, 'MAC Address'
+          = devices_form.text_field :mac

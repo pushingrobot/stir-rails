@@ -1,0 +1,107 @@
+@import "variables";
+// $stripe-width: $size-basis * 3;
+// $stripe-margin-content: $size-basis * 0.5;
+// $icon-size: $size-basis * 2;
+
+@keyframes fade {
+    0% {opacity: 0;}
+    5% {opacity: 1;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
+  }
+
+@mixin left-rounded($radius) {
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+}
+
+@mixin right-rounded($radius) {
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+}
+
+@mixin top-rounded($radius) {
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+}
+
+@mixin bottom-rounded($radius) {
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
+}
+
+@mixin rounded-column($child-type, $radius: $rounded-radius) {
+    > #{$child-type}:first-of-type {
+        @include top-rounded($radius)
+    }
+    > #{$child-type}:last-of-type {
+        @include bottom-rounded($radius)
+    }
+}
+
+@mixin rounded-row($child-type, $radius: $rounded-radius) {
+    > #{$child-type}:first-of-type {
+        @include left-rounded($radius)
+    }
+    > #{$child-type}:last-of-type {
+        @include right-rounded($radius)
+    }
+}
+
+%button {
+    @extend %shadowed;
+    position: relative;
+    border-radius: $rounded-radius;
+    border: none;
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+}
+.button { @extend %button }
+
+%separated {
+    margin-top: 2px;
+}
+.separated { @extend %separated }
+
+%shadowed {
+    box-shadow: 2px 2px 0 0 black;
+}
+.shadowed { @extend %shadowed }
+
+%centered-along {
+    display: flex;
+    justify-content: center;
+}
+
+%centered-across {
+    display: flex;
+    align-items: center;
+}
+
+%centered-both {
+    @extend %centered-along;
+    @extend %centered-across;
+}
+.centered { @extend %centered-both }
+
+%grow {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+%column {
+    display: flex;
+    flex-direction: column;
+}
+.column { @extend %column }
+
+%row {
+    display: flex;
+    flex-direction: row;
+}
+.row { @extend %row }
+
+.hidden {
+    display: none;
+}

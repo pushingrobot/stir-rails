@@ -1,0 +1,37 @@
+section.device.separated
+  = f.hidden_field :id
+  aside
+    .field
+      .radio.drop.right
+        - device_icons.each do |sym, str|
+          = f.radio_button :icon, str.to_s, {class: 'hidden'}
+          = f.label :icon, device_icon(sym), {value: str.to_s}
+      label Icon
+
+  main
+    .field
+      = f.label :name, 'Device Name'
+      = f.text_field :name
+
+    .device-lookup-fields
+      .field.lookup
+        select.select2-device-lookup name="lookup" data-id=f.object&.id
+      .row
+        .field
+          = f.label :host, 'Hostname or IP address'
+          = f.text_field :host, {placeholder: 'Enter an IP address manually'}
+        .field
+          = f.label :mac, 'MAC Address'
+          = f.text_field :mac, {placeholder: 'Enter a MAC address manually'}
+    .actions
+      .active
+        = f.check_box :active
+        = f.label :active
+      - if f.object&.id
+        ._destroy
+          = f.check_box :_destroy
+          = f.label :_destroy do
+            span.visible Remove this device
+      - else
+        .cancel
+          = link_to_remove_association('Cancel new device', f, { wrapper_class: 'device' })

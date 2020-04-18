@@ -1,0 +1,23 @@
+$font-header: 'Segoe UI', 'Helvetica Neue', 'sans-serif';
+$font-body: 'Segoe UI', 'Helvetica Neue', 'sans-serif';
+
+$hue-primary: 250deg;
+$hue-active: 150deg;
+$hue-error: 50deg;
+
+
+$color-background: #222;
+$color-element-background: hsla($hue-primary, 10%, 30%, 1);
+$color-element-background-active: hsla($hue-active, 20%, 40%, 1);
+$color-element-background-error: hsla($hue-error, 10%, 30%, 1);
+$color-action: hsla($hue-primary, 30%, 50%, 1);
+$color-active: hsla($hue-active, 30%, 50%, 1);
+$color-error: hsla($hue-error, 30%, 50%, 1);
+
+$size-basis: 16px;
+
+$font-size-large: $size-basis * 1.5;
+$font-size-normal: $size-basis;
+$font-size-small: $size-basis * 0.75;
+
+$rounded-radius: $size-basis;

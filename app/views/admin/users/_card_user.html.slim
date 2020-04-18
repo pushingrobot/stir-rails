@@ -1,0 +1,13 @@
+.user.card{id: user.id}
+    = link_to(edit_admin_user_path(user), {class: 'section'}) do
+        aside
+            = fa_icon(user.admin ? "id-card" : "user")
+        main
+            h3.title.name= user.name
+            h4.subtitle.email
+                - username, domain = user.email.split('@')
+                span.username= username
+                span.domain= '@' + domain
+
+    = render partial: 'device_button', collection: user.devices, as: :device
+/        = link_to fa_icon("plus", text: "Add a device"), new_admin_user_device_path(user.id), {class: 'button'}

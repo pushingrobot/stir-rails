@@ -1,0 +1,217 @@
+@import "variables";
+@import "mixins";
+@import "forms";
+
+.card.user {
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
+  > a.section {
+    @extend %row;
+    @extend %shadowed;
+    text-decoration: none;
+    color: white;
+    background-color: $color-element-background;
+    border-radius: $rounded-radius;
+    aside {
+      @extend %centered-across;
+      @extend %column;
+      .fa {
+        font-size: $size-basis * 4;
+        padding: 20px;
+      }
+    }
+    main {
+      padding: 20px;
+      padding-left: 0;
+      .title {
+        font-size: $font-size-large;
+      }
+      .subtitle {
+        font-size: 20px;
+        .domain {
+          color: lighten($color: $color-element-background, $amount: 30)
+        }
+      }
+    }
+  }
+  > a.device {
+    margin: $size-basis/2 $size-basis;
+  }
+}
+
+form.user {
+  @extend %column;
+  .error_explanation {
+    flex-direction: column;
+    padding: 0 20px 20px;
+    margin-bottom: 2px;
+  }
+  > section, > * > section {
+    @extend %shadowed;
+    background-color: $color-element-background;
+    border-radius: $rounded-radius;
+    @extend %row;
+    aside {
+      label {
+        font-size: $font-size-small;
+      }
+      @extend %centered-across;
+      @extend %column;
+      justify-content: space-between;
+      z-index: 1;
+      margin: 10px 0;
+      padding-top: 5px;
+      flex-basis: 96px;
+      text-align: center;
+    }
+    main {
+      padding: 15px 10px 10px 0;
+      @extend %grow;
+      > .device-lookup-fields {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 16px;
+        background: rgba(0,0,0,0.15);
+        .row {
+          padding-right: 10px;
+          .field, .field_with_errors {
+            margin-left: 10px;
+            @extend %grow;
+          }
+        }
+      }
+      .field, .field_with_errors {
+        @extend %fields-top-label
+      }
+    }
+    .actions {
+      @extend %row;
+    }
+    .active, ._destroy, .cancel {
+      @extend %row;
+      align-items: center;
+      line-height: 1em;
+      padding: 0 10px;
+      input {
+        margin: 0 5px;
+        font-size: $font-size-normal;
+        position: relative;
+        top: 1px;
+      }
+      label {
+        border-radius: $size-basis/2;
+        font-size: $font-size-normal;
+      }
+      &._destroy label {
+        color: lighten($color: orangered, $amount: 15);
+      }
+      &.cancel a {
+        text-decoration: none;
+        color: lighten($color: orangered, $amount: 15);
+      }
+    }
+    .cancel {
+      a {
+        display: block;
+        font-size: $font-size-normal;
+        border-radius: $size-basis/2;
+      }
+    }
+  }
+}
+
+hr {
+  border-color: #222;
+}
+
+.devices {
+  padding: 0 $size-basis;
+}
+
+.actions {
+  @extend %row;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding: 0;
+  justify-content: space-between;
+
+  input[type=submit] {
+    @extend %button;
+    border: none;
+    background-color: $color-element-background-active;
+    font-size: $font-size-large;
+    margin-top: $size-basis;
+  }
+
+
+  .button {
+    background-color: $color-element-background;
+  }
+
+  .button.back {
+    margin-left: $size-basis;
+    margin-bottom: $size-basis;
+  }
+
+  .button.add_fields, .button.add-user {
+    margin-left: $size-basis;
+    align-self: start;
+  }
+
+  .button.add-user {
+    margin-left: 0;
+  }
+  
+  .delete {
+    padding: 10px 15px;
+    text-align: right;
+    margin-top: $size-basis;
+    a {
+      text-decoration: none;
+      color: lighten($color: orangered, $amount: 15);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+.drop.right.radio {
+  display: flex;
+  overflow-x: hidden;
+  width: 64px;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.15);
+  label {
+    display: inline-block;
+    line-height: 1em;
+    width: 32px;
+    min-width: 32px;
+    padding: 16px;
+    box-shadow: 2px 2px 0 0 black;
+    font-size: $font-size-small;
+    text-align: center;
+    > .fa {
+      font-size: $font-size-normal * 2;
+    }
+  }
+  &:hover {
+    z-index: 1;
+    overflow: visible;
+    text-shadow: 1px 1px black;
+    label {
+        background-color: lighten($color-element-background, 15%);
+
+      display: block;
+      &:hover {
+        background: lighten($color-element-background, 25%);
+      }
+    }
+  }
+  input[type=radio]:checked + label {
+    display: inline-block;
+    order: -1;
+  }
+}

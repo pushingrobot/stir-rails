@@ -1,0 +1,41 @@
+= form_with(model: [:admin, user], local: true, class: 'user editing', id: user.id) do |form|
+
+  - if user.errors.any?
+    section.error_explanation
+      h2= pluralize(user.errors.count, "error") + ' prohibited this user from being saved:'
+
+      ul
+        - user.errors.full_messages.each do |message|
+          li= message
+  section.user
+    aside
+      .field
+        label User type
+        .radio.drop.right
+          = form.radio_button :admin, '1', { :checked => user.admin, :class => 'hidden' }
+          = form.label :admin, fa_icon('id-card', text: 'Admin'), { value: '1'}
+          = form.radio_button :admin, '0', { :checked => !user.admin, :class => 'hidden' }
+          = form.label :admin, fa_icon('user', text: 'User'), { value: '0'}
+    main
+      .field.name
+        = form.label :name
+        = form.text_field :name
+      .field.email
+        = form.label :email
+        = form.text_field :email
+      .field.password
+        = form.label :password
+        = form.password_field :password
+      .field.password_confirmation
+        = form.label :password_confirmation
+        = form.password_field :password_confirmation
+  .devices
+    = form.fields_for :devices, class: 'device' do |devices_form|
+      = render 'device_fields', f: devices_form
+
+  .actions
+    = link_to_add_association fa_icon('plus', text: 'Add Device'), form, :devices, {class: 'button', data: { association_insertion_node: '.devices', association_insertion_method: :append }}
+    - if user.persisted?
+      .delete
+        = link_to "Delete this user", admin_user_path(user), {method: :delete, data: { confirm: 'Are you sure you want to delete this user?'} }
+    = form.submit

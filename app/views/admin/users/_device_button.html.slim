@@ -1,0 +1,11 @@
+  = link_to stir_path(device), { :class => [device.active ? 'device' : 'device inactive'], :id => "device_#{device.id}", data: {id: device.id} } do
+    .left-side
+      .icon= device_icon(device.icon)
+    .progress[data-width="0"]
+    .middle
+      .name= device.name
+    .right-side
+      .status
+        .text-container
+          .text Waiting...
+        .power= fa_icon('power-off')

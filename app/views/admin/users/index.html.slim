@@ -1,0 +1,14 @@
+
+h1 Administrators
+
+= render partial: 'card_user', collection: @admins, as: :user
+
+h1 Users
+
+= render partial: 'card_user', collection: @users, as: :user
+
+    / = link_to 'Edit User', edit_admin_user_path(user)
+    / = link_to 'Remove User', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }
+<br>
+
+.actions= link_to fa_icon("plus", text: "Add a user"), new_admin_user_path, {class: 'button add-user'}

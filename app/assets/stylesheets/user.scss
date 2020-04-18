@@ -1,0 +1,142 @@
+@import "variables";
+@import "mixins";
+
+@keyframes fadein1 {
+    0% { opacity: 0; }
+    10% { opacity: 0; }
+    35% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadein2 {
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    75% { opacity: 1; }
+}
+
+.instructions {
+    text-align: center;
+    margin: 1em 0 2em;
+    > span {
+        display: inline-block;
+        margin: 0 0.25em;
+        &:nth-child(1) {
+            animation: fadein1 4s;
+        }
+        &:nth-child(2) {
+            animation: fadein2 4s;
+        }
+    }
+    span.green {
+        color: hsla(150, 70%, 70%, 1);
+    }
+}
+
+.device {
+    @extend %row;
+    @include rounded-row("div");
+    @extend %button;
+    padding: 0 !important;
+    margin-top: 10px;
+    > .left-side, > .right-side, > .middle {
+        @extend %centered-across;
+        position: relative;
+        z-index: 1;
+        padding: 0 10px;
+        transition: background-color 0.5s ease;
+    }
+    > .left-side, > .right-side {
+        background-color: darken($color: $color-element-background, $amount: 5%);
+    }
+    > .left-side {
+        padding-left: 15px;
+    }
+    > .middle {
+        @extend %grow;
+        background-color: $color-element-background;
+        font-size: 20px;
+        line-height: 1em;
+        min-height: 40px;
+        text-overflow: ellipsis;
+    }
+    > .right-side > .status {
+        @extend %row;
+        > .power {
+            width: 15px !important;
+            text-align: right;
+            color: orange;
+            transition: color 0.5s ease;
+        }
+        > .text-container {
+            position: relative;
+            width: 0;
+            overflow: hidden;
+            transition: width 0.5s ease;
+            > .text {
+                position: absolute;
+                right: 3px;
+                width: 70px;
+                text-align: center;
+                font-size: small;
+            }
+        }
+    }
+
+    > .progress {
+        position: absolute;
+        bottom: -1px;
+        height: 16px;
+        width: 0%;
+        min-width: 32px;
+        max-width: 100%;
+        opacity: 0;
+        background-color: yellow;
+        @include bottom-rounded(16px);
+        pointer-events: none;
+        z-index: 0;
+        transition: width 1s linear, opacity 0.5s ease;
+    }
+
+    &.inactive {
+        pointer-events: none;
+        > .right-side .fa {
+            color: white;
+
+            &:before {
+                content: "\f05e";
+            }
+        }
+    }
+
+    &.polling {
+        pointer-events: none;
+        .progress {
+            opacity: 1;
+        }
+        > .right-side > .status > .text-container {
+            width: 70px;
+        }
+        > .right-side .power {
+            color: white;
+        }
+        > .right-side .fa {
+            animation: fa-spin 2s infinite linear;
+
+            &:before {
+                content: "\f110";
+            }
+        }
+    }
+
+    &.active {
+        &:not(.polling) .power {
+            color: greenyellow;
+        }
+        > .left-side, > .right-side {
+            background-color: darken($color: $color-element-background-active, $amount: 5%);
+        }
+        > .middle {
+            background-color: $color-element-background-active;
+        }
+    }
+}

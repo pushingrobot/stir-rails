@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title Stir
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    nav.topmenu
+      h1= link_to 'stir', root_path
+      #session
+        - if current_user
+          - if current_user.admin?
+            = fa_icon('id-card', text: current_user.name)
+          - else
+            = fa_icon('user', text: current_user.name)
+          = link_to 'Log Out', logout_path
+        - else
+          = link_to 'Log In', login_path
+    main.pagecontent
+      #flash
+        - flash.each do |type, message|
+          = content_tag :div, message, { class: 'flash', id: "flash-#{type}"}
+      #page= yield

@@ -1,0 +1,41 @@
+= form_with(model: [:admin, @user, device], local: true) do |form|
+  - if device.errors.any?
+    #error_explanation
+      h2 #{pluralize(device.errors.count, "error")} prohibited this device from being saved:
+
+      ul
+        = device.errors.full_messages.each do |message|
+          li= message
+
+  .field.row
+    = form.label :name
+    = form.text_field :name
+
+  .field.row
+    = form.label :host
+    = form.text_field :host
+
+  .field.row
+    = form.label :mac
+    = form.text_field :mac,
+        { maxlength: 17,
+        pattern: "([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])" }
+
+
+  .field.row
+    = form.label :active
+    = form.check_box :active
+
+  .field.row
+    = form.label :icon
+    .radiobar
+      - device_icons.each do |sym, str|
+        = form.radio_button :icon, sym.to_s, {style: 'display: none'}
+        = form.label :icon, device_icon(sym), {value: sym.to_s}
+
+    = form.hidden_field :user_id
+
+  .actions
+    = link_to fa_icon('arrow-left', text: 'Back'), '', {class: 'button'}
+    = form.button :submit, {class: 'button'} do
+      = fa_icon('save', text: 'Save')

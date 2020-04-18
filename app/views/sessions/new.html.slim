@@ -1,0 +1,12 @@
+/ #alert= alert
+h1 Log in to begin
+= form_tag sessions_path, {class: 'login'} do |form| 
+  .field
+    = label_tag :email
+    = text_field_tag :email
+  .field
+    = label_tag :password
+    = password_field_tag :password
+  .actions
+    = submit_tag "Login"
+
