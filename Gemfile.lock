@@ -86,7 +86,6 @@ GEM
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     debug_inspector (0.0.3)
-    dotenv (2.7.5)
     erubi (1.9.0)
     ffi (1.12.2)
     font-awesome-rails (4.7.0.5)
@@ -124,7 +123,7 @@ GEM
     public_suffix (4.0.3)
     puma (4.3.3)
       nio4r (~> 2.0)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -237,7 +236,6 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   cocoon (~> 1.2)
-  dotenv (~> 2.7)
   font-awesome-rails (~> 4.7)
   ipaddress (~> 0.8.3)
   jbuilder (~> 2.7)
